@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\UrlShortenerController;
 use Illuminate\Support\Facades\Route;
 
 /*

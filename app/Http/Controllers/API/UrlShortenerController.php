@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\Url;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,14 +17,16 @@ class UrlShortenerController extends Controller
      */
     public function store(Request $request)
     {
-
+        //return ($request->get( 'url' ));
         try
         {
 
             if(auth()->user()->id)
             {
                 $longUrl = $request->get( 'url' );
-                $newGeneratedUrl = $request->get( 'shortlink' );
+                $newGeneratedUrl = $request->get( 'shortLink' );
+
+                //return $newGeneratedUrl;
 
                 if ( $longUrl != '' || $newGeneratedUrl != '' )
                 {
