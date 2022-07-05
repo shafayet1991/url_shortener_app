@@ -10,6 +10,9 @@ import Books from '../components/Books';
 import AddBook from '../components/AddBook';
 import EditBook from '../components/EditBook';
 
+import UrlShortener from '../components/UrlShorternerUI';
+import UrlManager from '../components/UrlsManager';
+
 export const routes = [
     {
         name: 'home',
@@ -47,9 +50,14 @@ export const routes = [
         component: AddBook
     },
     {
-        name: 'editbook',
-        path: '/books/edit/:id',
-        component: EditBook
+        name: 'UrlShortener',
+        path: '/url/add',
+        component: UrlShortener
+    },
+    {
+        name: 'UrlManager',
+        path: '/url/list',
+        component: UrlManager
     },
 ];
 

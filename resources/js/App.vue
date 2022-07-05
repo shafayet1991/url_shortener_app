@@ -8,11 +8,11 @@
                 </a>
 
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto" v-if="isLoggedIn">
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="#">Dashboard</a>
                     <router-link to="/dashboard" class="me-3 py-2 text-dark text-decoration-none">Dashboard</router-link>
                     <router-link to="/books" class="me-3 py-2 text-dark text-decoration-none">Books</router-link>
-                    <router-link to="/links" class="me-3 py-2 text-dark text-decoration-none">Links</router-link>
-                    <a class="py-2 text-dark text-decoration-none" style="cursor: pointer;" @click="logout">Pricing</a>
+                    <router-link to="/url/add" class="me-3 py-2 text-dark text-decoration-none">Url Shortener</router-link>
+                    <router-link to="/url/list" class="me-3 py-2 text-dark text-decoration-none">Links</router-link>
+                    <a class="py-2 text-dark text-decoration-none" style="cursor: pointer;" @click="logout">Logout</a>
                 </nav>
 
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto" v-else>
