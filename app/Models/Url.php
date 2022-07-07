@@ -9,8 +9,5 @@ class Url extends Model
 {
     use HasFactory;
 
-    /**
-     * @var mixed
-     */
     protected $fillable = ['old_url', 'new_url', 'user_ip', 'user_id'];
 }

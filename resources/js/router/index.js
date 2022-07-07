@@ -64,7 +64,7 @@ export const routes = [
         name: 'UrlRedirect',
         path: '/SL/:id',
         component: UrlRedirect
-    },
+    }
 ];
 
 const router = createRouter({

@@ -9,6 +9,15 @@ use Illuminate\Http\Response;
 
 class UrlShortenerController extends Controller
 {
+    // all Url
+    public function getUrlList(Request $request): array
+    {
+        $urls = Url::all()->toArray();
+        return $urls;
+        //return array_reverse($urls);
+        //return \Response(array_reverse($urls), 200);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
