@@ -30,6 +30,6 @@ Route::group(['prefix' => 'books', 'middleware' => 'auth:sanctum'], function () 
 
 Route::group(['prefix' => 'urls', 'middleware' => 'auth:sanctum'], function () {
     Route::post('/shorten', [UrlShortenerController::class, 'store']);
-    Route::get('/SUrl/shorten', [UrlShortenerController::class, 'urlHandler']);
 });
+Route::post('/SUrl/shorten', [UrlShortenerController::class, 'urlHandler']);
 

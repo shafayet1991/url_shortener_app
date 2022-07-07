@@ -66,14 +66,13 @@ class UrlShortenerController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function urlHandler(Request $request, $id){
-        $uri = $_SERVER['REQUEST_URI'];
-        $url = Url::Where('new_url', 'like', '%' . $uri . '%')->get('old_url');
-
+    public function urlHandler(Request $request){
+        $uri = $request->get( 'url' );
+        $url = Url::Where('new_url', 'like', '%' . $uri . '%')->get();
         if($uri =='' || $url =='' || count($url)==0){
-            return abort(403);
+            return \response("No data found", 402);
         }else{
-            return redirect($url[0]['old_url']);
+            return \response($url[0]['old_url'], 200);
         }
 
     }

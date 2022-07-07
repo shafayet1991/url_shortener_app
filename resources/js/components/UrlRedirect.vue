@@ -1,111 +1,40 @@
 <template>
-    <div>
-        <h4 class="text-center">Add URL</h4>
-        <div class="row">
-            <div class="col-md-12">
-                <form @submit.prevent="addUrl">
-                    <div class="form-group">
-                        <label>URL</label>
-                        <input type="text" class="form-control" v-model="url.currentUrl">
-                    </div>
-                    <div class="form-group">
-                        <label>New Url</label>
-                        <input type="url" class="form-control" disabled v-model="url.newUrl">
-                    </div>
-                    <div class="form-group mt-2">
-                        <button type="submit" class="btn btn-primary mr-2" v-if="genUrlBtn">Generate Short URL</button>
-                        <button class="btn btn-primary" v-if="genUrlBtn" @click="resetForm">Reset</button>
-                    </div>
-                </form>
-                <div class="form-group mt-2">
-                    <button class="btn btn-primary mr-2" v-if="copyUrlBtn" @click="copyUrl">Copy URL</button>
-                    <button class="btn btn-warning" v-if="copyUrlBtn" @click="resetForm">Reset</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="loading" v-if="loader">Loading&#8230;</div>
 </template>
 
 <script>
 export default {
+    name: "UrlRedirect",
     data() {
         return {
-            url: {
-                currentUrl: '',
-                newUrl: ''
-            },
-            copyUrlBtn: false,
-            genUrlBtn: true,
-            copyTextString: 'Copy Text To Clipboard',
-            loader: false,
+            loader: true,
+            hideHead: true,
         }
     },
     methods: {
-        //Validating and formatting given url
-        getUrl() {
-            this.loader = true;
-            let url = this.url.currentUrl;
-            let protocol_ok = url.startsWith("http://") || url.startsWith("https://") || url.startsWith("ftp://");
-            if(!protocol_ok){
-                this.url.newUrl = "http://"+url;
-                return this.url.newUrl;
-            }else{
-                return url;
-            }
-        },
+        urlHandler() {
+            this.$axios.post('/api/SUrl/shorten', {
+                url: window.location.href
+            }).then(response => {
+                    //console.log(response.data);
+                    if(response.status == 200){
+                        window.location.replace(response.data);
+                    } else{
 
-        //Generating random 6 digit alphanumaric
-        getRandom() {
-            let text = "";
-            let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for (var i = 0; i < 6; i++)
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-            return text;
-        },
-        addUrl() {
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('/api/urls/shorten', {
-                    shortLink: window.location.origin + "/SL/" + this.getRandom(),
-                    url: this.getUrl()
-                }).then(response => {
-                        this.url.newUrl = response.data;
-                        this.loader = false;
-                        if(this.url.newUrl != "" || this.url.newUrl != null) {
-                            this.copyUrlBtn = true;
-                            this.genUrlBtn = false;
-                        } else{
-                            this.copyUrlBtn = false;
-                            this.genUrlBtn = true;
-                        }
-                    })
-                    .catch(function (error) {
-                        console.error(error);
-                    });
-            })
-        },
-        copyUrl() {
-            /* Copy the new generated url */
-            navigator.clipboard.writeText(this.url.newUrl);
-
-            /* Alert the copied text */
-            alert("Copied the text: " + this.url.newUrl);
-        },
-        resetForm() {
-            this.copyUrlBtn= false;
-            this.genUrlBtn = true;
-            this.url.newUrl = null;
-            this.url.currentUrl = null;
+                    }
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         }
+
     },
     created() {
-    /*this.getRandom();
-    this.genHash();*/
-    /*console.log("random generator::"+this.getRandom());
-    console.log("random generator::"+this.genHash());*/
+        this.urlHandler();
     }
 }
 </script>
+
 
 <style scoped>
 /* Absolute Center Spinner */

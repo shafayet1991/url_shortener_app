@@ -12,6 +12,7 @@ import EditBook from '../components/EditBook';
 
 import UrlShortener from '../components/UrlShorternerUI';
 import UrlManager from '../components/UrlsManager';
+import UrlRedirect from '../components/UrlRedirect';
 
 export const routes = [
     {
@@ -58,6 +59,11 @@ export const routes = [
         name: 'UrlManager',
         path: '/url/list',
         component: UrlManager
+    },
+    {
+        name: 'UrlRedirect',
+        path: '/SL/:id',
+        component: UrlRedirect
     },
 ];
 
