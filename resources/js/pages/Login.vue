@@ -11,7 +11,7 @@
                     <div class="card-header">Login</div>
                     <div class="card-body">
                         <form>
-                            <div class="form-group row">
+                            <div class="form-group row mb-2">
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" v-model="email" required
@@ -19,7 +19,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row mb-2">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" v-model="password"

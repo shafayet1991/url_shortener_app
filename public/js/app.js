@@ -24227,7 +24227,7 @@ var _hoisted_7 = {
   "class": "card-body"
 };
 var _hoisted_8 = {
-  "class": "form-group row"
+  "class": "form-group row mb-2"
 };
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
@@ -24241,7 +24241,7 @@ var _hoisted_10 = {
   "class": "col-md-6"
 };
 var _hoisted_11 = {
-  "class": "form-group row"
+  "class": "form-group row mb-2"
 };
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
