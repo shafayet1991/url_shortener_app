@@ -23186,7 +23186,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       url: {
         currentUrl: '',
-        newUrl: ''
+        newUrl: '',
+        alertMessageClass: '',
+        showAlert: '',
+        responseMessage: ''
       },
       copyUrlBtn: false,
       genUrlBtn: true,
@@ -23227,13 +23230,37 @@ __webpack_require__.r(__webpack_exports__);
           shortLink: window.location.origin + "/SL/" + _this.getRandom(),
           url: _this.getUrl()
         }).then(function (response) {
-          _this.url.newUrl = response.data;
           _this.loader = false;
 
-          if (_this.url.newUrl != "" || _this.url.newUrl != null) {
-            _this.copyUrlBtn = true;
-            _this.genUrlBtn = false;
+          if (response.data.status == 200) {
+            if (_this.url.newUrl != "" || _this.url.newUrl != null) {
+              _this.copyUrlBtn = true;
+              _this.genUrlBtn = false;
+              _this.url.newUrl = response.data.data.newUrl;
+              _this.url.responseMessage = response.data.data.status;
+              _this.url.alertMessageClass = 'alert-success';
+              _this.url.showAlert = true;
+            } else {
+              _this.copyUrlBtn = false;
+              _this.genUrlBtn = true;
+            }
+          } else if (response.data.status == 202) {
+            _this.url.newUrl = response.data.data.newUrl;
+            _this.url.responseMessage = response.data.data.status;
+            _this.url.alertMessageClass = 'alert-warning';
+            _this.url.showAlert = true;
+            _this.copyUrlBtn = false;
+            _this.genUrlBtn = true;
+          } else if (response.data.status == 203) {
+            _this.url.newUrl = response.data.data.newUrl;
+            _this.url.responseMessage = response.data.data.status;
+            _this.url.alertMessageClass = 'alert-danger';
+            _this.url.showAlert = true;
+            _this.copyUrlBtn = false;
+            _this.genUrlBtn = true;
           } else {
+            _this.url.alertMessageClass = 'alert-danger';
+            _this.url.showAlert = true;
             _this.copyUrlBtn = false;
             _this.genUrlBtn = true;
           }
@@ -23245,24 +23272,22 @@ __webpack_require__.r(__webpack_exports__);
     copyUrl: function copyUrl() {
       /* Copy the new generated url */
       navigator.clipboard.writeText(this.url.newUrl);
-      /* Alert the copied text */
-
-      alert("Copied the text: " + this.url.newUrl);
+      this.url.alertMessageClass = 'alert-info';
+      this.url.responseMessage = "Url Copied Successfully";
+      this.url.showAlert = true;
+      this.copyUrlBtn = false;
+      this.genUrlBtn = true;
     },
     resetForm: function resetForm() {
       this.copyUrlBtn = false;
       this.genUrlBtn = true;
       this.url.newUrl = null;
       this.url.currentUrl = null;
+      this.url.alertMessageClass = 'alert-info';
+      this.url.responseMessage = "Form reset Successful!";
     }
   },
-  created: function created() {
-    /*this.getRandom();
-    this.genHash();*/
-
-    /*console.log("random generator::"+this.getRandom());
-    console.log("random generator::"+this.genHash());*/
-  }
+  created: function created() {}
 });
 
 /***/ }),
@@ -23990,7 +24015,13 @@ var _hoisted_11 = {
   "class": "loading"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [$data.url.showAlert ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    key: 0,
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.url.alertMessageClass, "alert"]),
+    role: "alert"
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.url.responseMessage), 3
+  /* TEXT, CLASS */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.addUrl && $options.addUrl.apply($options, arguments);
     }, ["prevent"]))

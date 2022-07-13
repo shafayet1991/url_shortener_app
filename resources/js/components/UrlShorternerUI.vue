@@ -3,6 +3,9 @@
         <h4 class="text-center">Add URL</h4>
         <div class="row">
             <div class="col-md-12">
+                <div v-bind:class="url.alertMessageClass" class="alert" v-if="url.showAlert" role="alert">
+                    {{url.responseMessage}}
+                </div>
                 <form @submit.prevent="addUrl">
                     <div class="form-group">
                         <label>URL</label>
@@ -33,7 +36,10 @@ export default {
         return {
             url: {
                 currentUrl: '',
-                newUrl: ''
+                newUrl: '',
+                alertMessageClass: '',
+                showAlert: '',
+                responseMessage: ''
             },
             copyUrlBtn: false,
             genUrlBtn: true,
@@ -69,12 +75,36 @@ export default {
                     shortLink: window.location.origin + "/SL/" + this.getRandom(),
                     url: this.getUrl()
                 }).then(response => {
-                        this.url.newUrl = response.data;
                         this.loader = false;
-                        if(this.url.newUrl != "" || this.url.newUrl != null) {
-                            this.copyUrlBtn = true;
-                            this.genUrlBtn = false;
+                        if(response.data.status == 200){
+                            if(this.url.newUrl != "" || this.url.newUrl != null) {
+                                this.copyUrlBtn = true;
+                                this.genUrlBtn = false;
+                                this.url.newUrl = response.data.data.newUrl;
+                                this.url.responseMessage = response.data.data.status;
+                                this.url.alertMessageClass = 'alert-success';
+                                this.url.showAlert = true;
+                            } else{
+                                this.copyUrlBtn = false;
+                                this.genUrlBtn = true;
+                            }
+                        } else if(response.data.status == 202){
+                            this.url.newUrl = response.data.data.newUrl;
+                            this.url.responseMessage = response.data.data.status;
+                            this.url.alertMessageClass = 'alert-warning';
+                            this.url.showAlert = true;
+                            this.copyUrlBtn = false;
+                            this.genUrlBtn = true;
+                        } else if(response.data.status == 203){
+                            this.url.newUrl = response.data.data.newUrl;
+                            this.url.responseMessage = response.data.data.status;
+                            this.url.alertMessageClass = 'alert-danger';
+                            this.url.showAlert = true;
+                            this.copyUrlBtn = false;
+                            this.genUrlBtn = true;
                         } else{
+                            this.url.alertMessageClass = 'alert-danger';
+                            this.url.showAlert = true;
                             this.copyUrlBtn = false;
                             this.genUrlBtn = true;
                         }
@@ -87,22 +117,22 @@ export default {
         copyUrl() {
             /* Copy the new generated url */
             navigator.clipboard.writeText(this.url.newUrl);
-
-            /* Alert the copied text */
-            alert("Copied the text: " + this.url.newUrl);
+            this.url.alertMessageClass = 'alert-info';
+            this.url.responseMessage = "Url Copied Successfully"
+            this.url.showAlert = true;
+            this.copyUrlBtn = false;
+            this.genUrlBtn = true;
         },
         resetForm() {
             this.copyUrlBtn= false;
             this.genUrlBtn = true;
             this.url.newUrl = null;
             this.url.currentUrl = null;
+            this.url.alertMessageClass = 'alert-info';
+            this.url.responseMessage = "Form reset Successful!"
         }
     },
     created() {
-    /*this.getRandom();
-    this.genHash();*/
-    /*console.log("random generator::"+this.getRandom());
-    console.log("random generator::"+this.genHash());*/
     }
 }
 </script>
