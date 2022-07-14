@@ -15,7 +15,9 @@ URL shortening is used to create shorter aliases for long URLs. We call these sh
 ![img_1.png](img_1.png)
 
 
-##Installation:
+## Installation Guide
+
+`Laravel 8` requires `PHP 7.3+` or above so you need this version or the latest version of PHP installed on your system.
 
 #### Clone the repository
 
