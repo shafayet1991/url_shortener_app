@@ -73,3 +73,13 @@ php artisan serve
 
 #### Go to link `localhost:8000` OR `127.0.0.1:8000`
 
+
+## Test URLs
+
+Here are some handy test urls you can use while you're experimenting with the system.
+
+- http://www.yahoo.com/ (OK)
+- http://www.google.com/ (OK)
+- http://malware.testing.google.test/testing/malware/ (Malware)
+- http://twitter.com/ (OK)
+
