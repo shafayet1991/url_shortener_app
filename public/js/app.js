@@ -23172,8 +23172,8 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
         _this.$axios.get('/api/urls/getUrl').then(function (response) {
-          _this.urls = response.data;
-          console.log(response.data);
+          _this.urls = response.data.data;
+          console.log(response.data.data);
         })["catch"](function (error) {
           console.error(error);
         });
@@ -23735,18 +23735,11 @@ var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
     scope: "col"
   }, "Created At"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
     scope: "col"
-  }, "Updated At"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
-    scope: "col"
-  }, "Actions")])], -1
+  }, "Updated At"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <th scope=\"col\">Actions</th>")])], -1
   /* HOISTED */
   );
 });
 
-var _hoisted_5 = {
-  "class": "btn-group",
-  role: "group"
-};
-var _hoisted_6 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.urls, function (url) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
@@ -23762,14 +23755,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(url.updated_at), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-      "class": "btn btn-danger",
-      onClick: function onClick($event) {
-        return _ctx.deleteUrl(url.id);
-      }
-    }, "Delete", 8
-    /* PROPS */
-    , _hoisted_6)])])]);
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <td>\n                    <div class=\"btn-group\" role=\"group\">\n                        <button class=\"btn btn-danger\" @click=\"deleteUrl(url.id)\">Delete</button>\n                    </div>\n                </td>")]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])])]);

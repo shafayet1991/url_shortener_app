@@ -12,7 +12,7 @@ URL shortening is used to create shorter aliases for long URLs. We call these sh
 
 ![img_4.png](img_4.png)
 
-![img_1.png](img_1.png)
+![img_5.png](img_5.png)
 
 
 ## Installation Guide
@@ -51,6 +51,13 @@ php artisan migrate
 
 ```bash
 npm install
+```
+
+#### Generate Google safe browsing API key
+
+Generate and configure API key on `.env` file. [Documents](https://kb.synology.com/en-uk/SRM/tutorial/How_to_generate_Google_Safe_Browsing_API_keys) for generating google safe browsing API key.
+```bash
+GOOGLE_API_KEY=your_google_safe_browsing_API_key
 ```
 
 #### Run Project

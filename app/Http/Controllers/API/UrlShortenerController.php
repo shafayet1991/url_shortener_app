@@ -10,13 +10,17 @@ use Snipe\Safebrowsing\Facade\Safebrowsing;
 
 class UrlShortenerController extends Controller
 {
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|Response
+     */
     // all Url
-    public function getUrlList(Request $request): array
+    public function getUrlList(Request $request)
     {
         $urls = Url::all()->toArray();
-        return $urls;
-        //return array_reverse($urls);
-        //return \Response(array_reverse($urls), 200);
+        return response()->json(['status'=>200,'data'=>$urls], 200);
     }
 
     /**
