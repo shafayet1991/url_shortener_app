@@ -9,7 +9,7 @@
                     <th scope="col">New Short URL</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
-                    <th scope="col">Actions</th>
+<!--                    <th scope="col">Actions</th>-->
                 </tr>
             </thead>
 
@@ -20,11 +20,11 @@
                 <td>{{ url.new_url }}</td>
                 <td>{{ url.created_at }}</td>
                 <td>{{ url.updated_at }}</td>
-                <td>
+<!--                <td>
                     <div class="btn-group" role="group">
                         <button class="btn btn-danger" @click="deleteUrl(url.id)">Delete</button>
                     </div>
-                </td>
+                </td>-->
             </tr>
             </tbody>
         </table>
