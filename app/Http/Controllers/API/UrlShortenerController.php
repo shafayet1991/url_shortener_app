@@ -37,12 +37,10 @@ class UrlShortenerController extends Controller
 
                 if ( $longUrl != '' || $newGeneratedUrl != '' )
                 {
+                    //GET array list of matched url
                     $urlFound = Url::where( 'old_url', $longUrl )->get( [ 'id', 'new_url', 'old_url' ] )->toArray();
-                    //return response()->json(['status'=>200,'data'=>$urlFound], 200);
-                    //return ('Status of the third URL is: '.Safebrowsing::isFlagged('http://www.yahoo.com/'));
                     if ( !empty( $urlFound ) )
                     {
-                        //return $urlFound[ 0 ][ 'new_url' ];
                         $data = [
                             "status" => "Url already added, please try another",
                             "oldUrl" => $urlFound[ 0 ][ 'old_url' ],
@@ -99,8 +97,6 @@ class UrlShortenerController extends Controller
     {
         $uri = $request->get( 'url' );
         $url = Url::Where('new_url', 'like', '%' . $uri . '%')->get();
-        //return response()->json(['status'=>202,'data'=>$url], 202);
-        $oldUrl = $url[0]['old_url'];
         if($uri =='' || $url =='' || count($url)==0){
             return response()->json(['status'=>202,'data'=>'No data found'], 202);
         }else{

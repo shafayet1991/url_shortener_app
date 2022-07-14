@@ -6,10 +6,6 @@ import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 
-import Books from '../components/Books';
-import AddBook from '../components/AddBook';
-import EditBook from '../components/EditBook';
-
 import UrlShortener from '../components/UrlShorternerUI';
 import UrlManager from '../components/UrlsManager';
 import UrlRedirect from '../components/UrlRedirect';
@@ -39,16 +35,6 @@ export const routes = [
         name: 'dashboard',
         path: '/dashboard',
         component: Dashboard
-    },
-    {
-        name: 'books',
-        path: '/books',
-        component: Books
-    },
-    {
-        name: 'addbook',
-        path: '/books/add',
-        component: AddBook
     },
     {
         name: 'UrlShortener',
