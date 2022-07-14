@@ -15,6 +15,8 @@ URL shortening is used to create shorter aliases for long URLs. We call these sh
 ![img_1.png](img_1.png)
 
 
+##Installation:
+
 #### Clone the repository
 
 ```bash
