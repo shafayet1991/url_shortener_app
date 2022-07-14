@@ -16,9 +16,9 @@ export default {
             this.$axios.post('/api/SUrl/shorten', {
                 url: window.location.href
             }).then(response => {
-                    //console.log(response.data);
+                    console.log(response.data.data[0].old_url);
                     if(response.status == 200){
-                        window.location.replace(response.data);
+                        window.location.replace(response.data.data[0].old_url);
                     } else{
 
                     }

@@ -23,11 +23,10 @@ class UrlShortenerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse|Response
      */
     public function store(Request $request)
     {
-        //return ($request->get( 'url' ));
         try
         {
 
@@ -38,7 +37,8 @@ class UrlShortenerController extends Controller
 
                 if ( $longUrl != '' || $newGeneratedUrl != '' )
                 {
-                    $urlFound = Url::where( 'old_url', $longUrl )->get( [ 'id', 'new_url' ] )->toArray();
+                    $urlFound = Url::where( 'old_url', $longUrl )->get( [ 'id', 'new_url', 'old_url' ] )->toArray();
+                    //return response()->json(['status'=>200,'data'=>$urlFound], 200);
                     //return ('Status of the third URL is: '.Safebrowsing::isFlagged('http://www.yahoo.com/'));
                     if ( !empty( $urlFound ) )
                     {
@@ -71,7 +71,7 @@ class UrlShortenerController extends Controller
                             if ( $urlTable->save() )
                             {
                                 $data = [
-                                    "status" => "New Url saved Successfully",
+                                    "status" => "New Url generated Successfully",
                                     "oldUrl" => $urlTable->old_url,
                                     "newUrl" => $urlTable->new_url,
                                 ];
@@ -93,15 +93,18 @@ class UrlShortenerController extends Controller
      *
      * @param Request $request
      * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse|Response
      */
-    public function urlHandler(Request $request){
+    public function urlHandler(Request $request)
+    {
         $uri = $request->get( 'url' );
         $url = Url::Where('new_url', 'like', '%' . $uri . '%')->get();
+        //return response()->json(['status'=>202,'data'=>$url], 202);
+        $oldUrl = $url[0]['old_url'];
         if($uri =='' || $url =='' || count($url)==0){
-            return \response("No data found", 402);
+            return response()->json(['status'=>202,'data'=>'No data found'], 202);
         }else{
-            return \response($url[0]['old_url'], 200);
+            return response()->json(['status'=>200,'data'=> $url], 200);
         }
 
     }

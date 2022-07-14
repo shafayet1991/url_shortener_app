@@ -3,8 +3,9 @@
         <h4 class="text-center">Add URL</h4>
         <div class="row">
             <div class="col-md-12">
-                <div v-bind:class="url.alertMessageClass" class="alert" v-if="url.showAlert" role="alert">
+                <div v-bind:class="url.alertMessageClass" class="alert alert-dismissible fade show" v-if="url.showAlert" role="alert">
                     {{url.responseMessage}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <form @submit.prevent="addUrl">
                     <div class="form-group">
@@ -100,17 +101,25 @@ export default {
                             this.url.responseMessage = response.data.data.status;
                             this.url.alertMessageClass = 'alert-danger';
                             this.url.showAlert = true;
-                            this.copyUrlBtn = false;
-                            this.genUrlBtn = true;
+                            this.copyUrlBtn = true;
+                            this.genUrlBtn = false;
                         } else{
                             this.url.alertMessageClass = 'alert-danger';
+                            this.url.responseMessage = "Try Again";
                             this.url.showAlert = true;
                             this.copyUrlBtn = false;
                             this.genUrlBtn = true;
+                            this.loader = false;
                         }
                     })
                     .catch(function (error) {
                         console.error(error);
+                        this.url.alertMessageClass = 'alert-danger';
+                        this.url.responseMessage = "Try Again";
+                        this.url.showAlert = true;
+                        this.copyUrlBtn = false;
+                        this.genUrlBtn = true;
+                        this.loader = false;
                     });
             })
         },
@@ -120,14 +129,15 @@ export default {
             this.url.alertMessageClass = 'alert-info';
             this.url.responseMessage = "Url Copied Successfully"
             this.url.showAlert = true;
-            this.copyUrlBtn = false;
-            this.genUrlBtn = true;
+            this.copyUrlBtn = true;
+            this.genUrlBtn = false;
         },
         resetForm() {
             this.copyUrlBtn= false;
             this.genUrlBtn = true;
             this.url.newUrl = null;
             this.url.currentUrl = null;
+            this.loader = false,
             this.url.alertMessageClass = 'alert-info';
             this.url.responseMessage = "Form reset Successful!"
         }

@@ -23154,9 +23154,10 @@ __webpack_require__.r(__webpack_exports__);
       this.$axios.post('/api/SUrl/shorten', {
         url: window.location.href
       }).then(function (response) {
-        //console.log(response.data);
+        console.log(response.data.data[0].old_url);
+
         if (response.status == 200) {
-          window.location.replace(response.data);
+          window.location.replace(response.data.data[0].old_url);
         } else {}
       })["catch"](function (error) {
         console.error(error);
@@ -23256,16 +23257,24 @@ __webpack_require__.r(__webpack_exports__);
             _this.url.responseMessage = response.data.data.status;
             _this.url.alertMessageClass = 'alert-danger';
             _this.url.showAlert = true;
-            _this.copyUrlBtn = false;
-            _this.genUrlBtn = true;
+            _this.copyUrlBtn = true;
+            _this.genUrlBtn = false;
           } else {
             _this.url.alertMessageClass = 'alert-danger';
+            _this.url.responseMessage = "Try Again";
             _this.url.showAlert = true;
             _this.copyUrlBtn = false;
             _this.genUrlBtn = true;
+            _this.loader = false;
           }
         })["catch"](function (error) {
           console.error(error);
+          this.url.alertMessageClass = 'alert-danger';
+          this.url.responseMessage = "Try Again";
+          this.url.showAlert = true;
+          this.copyUrlBtn = false;
+          this.genUrlBtn = true;
+          this.loader = false;
         });
       });
     },
@@ -23275,15 +23284,15 @@ __webpack_require__.r(__webpack_exports__);
       this.url.alertMessageClass = 'alert-info';
       this.url.responseMessage = "Url Copied Successfully";
       this.url.showAlert = true;
-      this.copyUrlBtn = false;
-      this.genUrlBtn = true;
+      this.copyUrlBtn = true;
+      this.genUrlBtn = false;
     },
     resetForm: function resetForm() {
       this.copyUrlBtn = false;
       this.genUrlBtn = true;
       this.url.newUrl = null;
       this.url.currentUrl = null;
-      this.url.alertMessageClass = 'alert-info';
+      this.loader = false, this.url.alertMessageClass = 'alert-info';
       this.url.responseMessage = "Form reset Successful!";
     }
   },
@@ -23979,53 +23988,67 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "col-md-12"
 };
-var _hoisted_4 = {
+
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn-close",
+    "data-bs-dismiss": "alert",
+    "aria-label": "Close"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_5 = {
   "class": "form-group"
 };
 
-var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "URL", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_6 = {
+var _hoisted_7 = {
   "class": "form-group"
 };
 
-var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "New Url", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_8 = {
+var _hoisted_9 = {
   "class": "form-group mt-2"
 };
-var _hoisted_9 = {
+var _hoisted_10 = {
   key: 0,
   type: "submit",
   "class": "btn btn-primary mr-2"
 };
-var _hoisted_10 = {
+var _hoisted_11 = {
   "class": "form-group mt-2"
 };
-var _hoisted_11 = {
+var _hoisted_12 = {
   key: 0,
   "class": "loading"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [$data.url.showAlert ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 0,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.url.alertMessageClass, "alert"]),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.url.alertMessageClass, "alert alert-dismissible fade show"]),
     role: "alert"
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.url.responseMessage), 3
-  /* TEXT, CLASS */
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.url.responseMessage) + " ", 1
+  /* TEXT */
+  ), _hoisted_4], 2
+  /* CLASS */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.addUrl && $options.addUrl.apply($options, arguments);
     }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
@@ -24033,7 +24056,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.url.currentUrl]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.url.currentUrl]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "url",
     "class": "form-control",
     disabled: "",
@@ -24042,7 +24065,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.url.newUrl]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [$data.genUrlBtn ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_9, "Generate Short URL")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.genUrlBtn ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.url.newUrl]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [$data.genUrlBtn ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_10, "Generate Short URL")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.genUrlBtn ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
     "class": "btn btn-primary",
     onClick: _cache[2] || (_cache[2] = function () {
@@ -24050,7 +24073,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, "Reset")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 32
   /* HYDRATE_EVENTS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [$data.copyUrlBtn ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [$data.copyUrlBtn ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     "class": "btn btn-primary mr-2",
     onClick: _cache[4] || (_cache[4] = function () {
@@ -24062,7 +24085,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[5] || (_cache[5] = function () {
       return $options.resetForm && $options.resetForm.apply($options, arguments);
     })
-  }, "Reset")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])]), $data.loader ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, "Loading…")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
+  }, "Reset")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])]), $data.loader ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, "Loading…")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
   /* STABLE_FRAGMENT */
   );
 }
